@@ -1,3 +1,26 @@
 site_name: Bitdeas Tech Notes
 
 theme: readthedocs
+
+nav:
+- 'Visual Studio':
+  - visual-studio/versions.md
+- 'SQL Server':
+  - sql-server/versions.md
+  - sql-server/get-schema-details.md
+- 'GIT':
+  - GIT/aliases.md
+- 'Snippets':
+  - code-snippets/extract-binary-content-from-database.md 
+  - code-snippets/map-error-message-to-code.md 
+
+markdown_extensions:  
+- admonition #!!! note, !!! warning
+# emojis are huge, investigate
+#- pymdownx.emoji:
+#    emoji_index: !!python/name:materialx.emoji.twemoji
+#    emoji_generator: !!python/name:materialx.emoji.to_svg
+
+plugins:
+- search  
+#- awesome-pages
