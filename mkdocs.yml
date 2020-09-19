@@ -11,7 +11,7 @@ nav:
 - 'GIT':
   - GIT/aliases.md
 - 'Snippets':
-  - code-snippets/extract-binary-content-from-database.md 
+  - code-snippets/manage-binary-content-from-database.md 
   - code-snippets/map-error-message-to-code.md 
 
 markdown_extensions:  
