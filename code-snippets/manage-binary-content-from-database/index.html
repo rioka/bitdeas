@@ -9,7 +9,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>Save VARBINARY column to a file - Bitdeas Tech Notes</title>
+  <title>Manage VARBINARY column via T-SQL - Bitdeas Tech Notes</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
   <link rel="stylesheet" href="../../css/theme.css" />
@@ -18,8 +18,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Save VARBINARY column to a file";
-    var mkdocs_page_input_path = "code-snippets\\extract-binary-content-from-database.md";
+    var mkdocs_page_name = "Manage VARBINARY column via T-SQL";
+    var mkdocs_page_input_path = "code-snippets\\manage-binary-content-from-database.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -63,14 +63,24 @@
                 <ul>
                     <li class="toctree-l1"><a class="reference internal" href="../../GIT/aliases/">Some aliases</a>
                     </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../GIT/clean/">Git clean</a>
+                    </li>
                 </ul>
                 <p class="caption"><span class="caption-text">Snippets</span></p>
                 <ul class="current">
-                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Save VARBINARY column to a file</a>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Manage VARBINARY column via T-SQL</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#requirements">Requirements</a>
+    <li class="toctree-l2"><a class="reference internal" href="#insert-a-blob">Insert a BLOB</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#code">Code</a>
+    <li class="toctree-l2"><a class="reference internal" href="#update-content-of-a-varbinary-column">Update content of a VARBINARY column</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#save-content-to-file">Save content to file</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#requirements">Requirements</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#code">Code</a>
+    </li>
+        </ul>
     </li>
     </ul>
                     </li>
@@ -102,7 +112,7 @@
         
       
     
-    <li>Save VARBINARY column to a file</li>
+    <li>Manage VARBINARY column via T-SQL</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -113,10 +123,40 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="extract-the-content-of-a-varbinary-or-image-column-into-a-file-using-t-sql-only">Extract the content of a VARBINARY (or IMAGE) column into a file using T-SQL only</h1>
-<p>Use this code to save  the content of a blob (varbinary or image) 
+                <h1 id="insert-update-and-extract-a-blob-using-t-sql-only">Insert, update and extract a BLOB using T-SQL only</h1>
+<h2 id="insert-a-blob">Insert a BLOB</h2>
+<pre><code class="SQL">/* Create a table with a VARBINARY column */
+CREATE TABLE Documents(
+  [FileName] NVARCHAR(60),
+  [FileType  NVARCHAR(60), 
+  [Content]  VARBINARY(max)
+)
+GO
+
+INSERT INTO Documents(
+  [FileName], [FileType], [Content]
+)
+SELECT 
+  N'Text1.txt' AS [FileName],
+  N'.txt' AS [FileType],
+  * FROM OPENROWSET(BULK N'C:\path\to\Text1.txt', SINGLE_BLOB) AS [Content]
+GO
+</code></pre>
+
+<h2 id="update-content-of-a-varbinary-column">Update content of a VARBINARY column</h2>
+<p>Assuming the same table as in the sample above</p>
+<pre><code class="SQL">UPDATE 
+  Documents
+SET 
+  Content = (SELECT * FROM OPENROWSET(BULK N'c:\path\to\20180520215030133.docx', SINGLE_BLOB) AS T)
+WHERE 
+  [FileName] = N'Doc1.docx'
+</code></pre>
+
+<h2 id="save-content-to-file">Save content to file</h2>
+<p>Use this code to save the content of a blob (varbinary or image) 
 into a file, using T-SQL only.</p>
-<h2 id="requirements">Requirements</h2>
+<h3 id="requirements">Requirements</h3>
 <pre><code class="SQL">sp_configure 'show advanced options', 1;  
 GO  
 
@@ -130,7 +170,7 @@ RECONFIGURE;
 GO 
 </code></pre>
 
-<h2 id="code">Code</h2>
+<h3 id="code">Code</h3>
 <pre><code class="SQL">DECLARE 
   @rawData      VARBINARY(MAX),
   @timestamp    VARCHAR(MAX),
@@ -177,7 +217,7 @@ DEALLOCATE IMGPATH
         <a href="../map-error-message-to-code/" class="btn btn-neutral float-right" title="Get SQL Server error code from message">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../../GIT/aliases/" class="btn btn-neutral" title="Some aliases"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../GIT/clean/" class="btn btn-neutral" title="Git clean"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -203,7 +243,7 @@ DEALLOCATE IMGPATH
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../../GIT/aliases/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../../GIT/clean/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
         <span style="margin-left: 15px"><a href="../map-error-message-to-code/" style="color: #fcfcfc">Next &raquo;</a></span>

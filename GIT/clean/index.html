@@ -9,7 +9,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>Versions - Bitdeas Tech Notes</title>
+  <title>Git clean - Bitdeas Tech Notes</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
   <link rel="stylesheet" href="../../css/theme.css" />
@@ -18,8 +18,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Versions";
-    var mkdocs_page_input_path = "sql-server\\versions.md";
+    var mkdocs_page_name = "Git clean";
+    var mkdocs_page_input_path = "GIT\\clean.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -53,19 +53,21 @@
                     </li>
                 </ul>
                 <p class="caption"><span class="caption-text">SQL Server</span></p>
-                <ul class="current">
-                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Versions</a>
-    <ul class="current">
-    </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../sql-server/versions/">Versions</a>
                     </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../get-schema-details/">Get schema details</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../../sql-server/get-schema-details/">Get schema details</a>
                     </li>
                 </ul>
                 <p class="caption"><span class="caption-text">GIT</span></p>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../../GIT/aliases/">Some aliases</a>
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="../aliases/">Some aliases</a>
                     </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../GIT/clean/">Git clean</a>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Git clean</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#main-cptions">Main cptions</a>
+    </li>
+    </ul>
                     </li>
                 </ul>
                 <p class="caption"><span class="caption-text">Snippets</span></p>
@@ -96,11 +98,11 @@
     
       
         
-          <li>SQL Server &raquo;</li>
+          <li>GIT &raquo;</li>
         
       
     
-    <li>Versions</li>
+    <li>Git clean</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -111,48 +113,36 @@
           <div role="main">
             <div class="section">
               
-                <hr />
-<h2 id="sql-server-versions">SQL Server versions</h2>
-<p>Here is a list of SQL Server versions, and related commercial product</p>
+                <h1 id="what-it-does">What it does</h1>
+<p><code>git clean</code> delete files which are not part of git.</p>
+<h2 id="main-cptions">Main cptions</h2>
 <table>
 <thead>
 <tr>
-<th align="center">Version</th>
-<th>Product</th>
+<th>Option</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="center">8</td>
-<td>SQL Server 2000</td>
+<td><code>-f</code></td>
+<td>Delete files from the repository</td>
 </tr>
 <tr>
-<td align="center">9</td>
-<td>SQL Server 2005</td>
+<td><code>-fd</code></td>
+<td>Delete files and folders from the repository</td>
 </tr>
 <tr>
-<td align="center">10</td>
-<td>SQL Server 2008</td>
+<td><code>-n</code>, <code>-dry-run</code></td>
+<td><em>dry run</em>: Print out the list of files which will be removed</td>
 </tr>
 <tr>
-<td align="center">11</td>
-<td>SQL Server 2012</td>
+<td><code>-X</code></td>
+<td>Remove ignored (ie files in <code>.gitignore</code>) files</td>
 </tr>
 <tr>
-<td align="center">12</td>
-<td>SQL Server 2014</td>
-</tr>
-<tr>
-<td align="center">13</td>
-<td>SQL Server 2016</td>
-</tr>
-<tr>
-<td align="center">14</td>
-<td>SQL Server 2017</td>
-</tr>
-<tr>
-<td align="center">15</td>
-<td>SQL Server 2019</td>
+<td><code>-x</code></td>
+<td>Remove ignored and non-ignored (ie manually created ones) files</td>
 </tr>
 </tbody>
 </table>
@@ -163,10 +153,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../get-schema-details/" class="btn btn-neutral float-right" title="Get schema details">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../../code-snippets/manage-binary-content-from-database/" class="btn btn-neutral float-right" title="Manage VARBINARY column via T-SQL">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../../visual-studio/versions/" class="btn btn-neutral" title="Versions"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../aliases/" class="btn btn-neutral" title="Some aliases"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -192,10 +182,10 @@
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../../visual-studio/versions/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../aliases/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../get-schema-details/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../../code-snippets/manage-binary-content-from-database/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
