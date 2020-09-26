@@ -78,11 +78,11 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#use-object_id">Use OBJECT_ID</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#use-using-sysobjects-catalog-view">Use Using sys.objects Catalog View</a>
+    <li class="toctree-l2"><a class="reference internal" href="#use-sysobjects-catalog-view">Use sys.objects Catalog View</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#use-using-systables-catalog-view">Use Using sys.tables Catalog View</a>
+    <li class="toctree-l2"><a class="reference internal" href="#use-systables-catalog-view">Use sys.tables Catalog View</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#using-syssysobjects">Using sys.sysobjects</a>
+    <li class="toctree-l2"><a class="reference internal" href="#use-syssysobjects">Use sys.sysobjects</a>
     </li>
     </ul>
                     </li>
@@ -142,7 +142,7 @@ BEGIN
 END
 </code></pre>
 
-<h3 id="use-using-sysobjects-catalog-view">Use Using sys.objects Catalog View</h3>
+<h3 id="use-sysobjects-catalog-view">Use sys.objects Catalog View</h3>
 <pre><code class="SQL">IF EXISTS(SELECT 1 
           FROM   sys.objects 
           WHERE  object_id = OBJECT_ID(N'orders.Customers') 
@@ -152,7 +152,7 @@ BEGIN
 END
 </code></pre>
 
-<h3 id="use-using-systables-catalog-view">Use Using sys.tables Catalog View</h3>
+<h3 id="use-systables-catalog-view">Use sys.tables Catalog View</h3>
 <pre><code class="SQL">IF EXISTS(SELECT 1 
           FROM   sys.tables T
           INNER JOIN sys.schemas S
@@ -167,7 +167,7 @@ END
 *We can skip JOIN if there if database has just one schema, or tables have unique names.*
 </code></pre>
 
-<h3 id="using-syssysobjects">Using sys.sysobjects</h3>
+<h3 id="use-syssysobjects">Use sys.sysobjects</h3>
 <p>Should be avoided, as <code>sys.sysobjects</code> is being deprecated.</p>
               
             </div>
