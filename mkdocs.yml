@@ -10,7 +10,7 @@ nav:
   - sql-server/get-schema-details.md
 - 'GIT':
   - GIT/aliases.md
-  - GIT/clean.md
+  - GIT/quick-reference.md
 - 'Snippets':
   - code-snippets/manage-binary-content-from-database.md 
   - code-snippets/map-error-message-to-code.md 
