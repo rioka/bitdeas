@@ -14,6 +14,7 @@ nav:
 - 'Snippets':
   - code-snippets/manage-binary-content-from-database.md 
   - code-snippets/map-error-message-to-code.md 
+  - code-snippets/check-object-exists-in-db.md 
 
 markdown_extensions:  
 - admonition #!!! note, !!! warning
