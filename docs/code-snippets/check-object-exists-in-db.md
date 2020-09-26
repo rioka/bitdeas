@@ -28,7 +28,7 @@ BEGIN
 END
 ```
 
-### Use Using sys.objects Catalog View
+### Use sys.objects Catalog View
 
 ```SQL
 IF EXISTS(SELECT 1 
@@ -40,7 +40,7 @@ BEGIN
 END
 ```
 
-### Use Using sys.tables Catalog View
+### Use sys.tables Catalog View
 
 ```SQL
 IF EXISTS(SELECT 1 
@@ -57,6 +57,6 @@ END
 *We can skip JOIN if there if database has just one schema, or tables have unique names.*
 ```
 
-### Using sys.sysobjects 
+### Use sys.sysobjects 
 
 Should be avoided, as `sys.sysobjects` is being deprecated.
