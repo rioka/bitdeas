@@ -9,7 +9,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>Git clean - Bitdeas Tech Notes</title>
+  <title>Quick reference - Bitdeas Tech Notes</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
   <link rel="stylesheet" href="../../css/theme.css" />
@@ -18,8 +18,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Git clean";
-    var mkdocs_page_input_path = "GIT\\clean.md";
+    var mkdocs_page_name = "Quick reference";
+    var mkdocs_page_input_path = "GIT\\quick-reference.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -63,9 +63,41 @@
                 <ul class="current">
                     <li class="toctree-l1"><a class="reference internal" href="../aliases/">Some aliases</a>
                     </li>
-                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Git clean</a>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Quick reference</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#main-cptions">Main cptions</a>
+    <li class="toctree-l2"><a class="reference internal" href="#how-to">How to...</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#clean-working-directory">Clean working directory</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#delete-a-branch">Delete a branch</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#remove-a-remote-branch">Remove a remote branch</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#ccreate-a-branch-from-a-given-source">Ccreate a branch from a given source</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#create-a-new-branch-from-changes-in-current-branch">Create a new branch from changes in current branch</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#rename-a-branch">Rename a branch</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#checkout-a-tag">Checkout a tag</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#list-tags">List tags</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#create-a-tag">Create a tag</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#stash-changes">Stash changes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#check-stash">Check stash</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#apply-stash">Apply stash</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#search-for-a-commit">Search for a commit</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#unstage-a-file">Unstage a file</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#revert-committed-changes-in-a-file">Revert committed changes in a file</a>
+    </li>
+        </ul>
     </li>
     </ul>
                     </li>
@@ -75,6 +107,8 @@
                     <li class="toctree-l1"><a class="reference internal" href="../../code-snippets/manage-binary-content-from-database/">Manage VARBINARY column via T-SQL</a>
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="../../code-snippets/map-error-message-to-code/">Get SQL Server error code from message</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../code-snippets/check-object-exists-in-db/">Check if an object exists in a database</a>
                     </li>
                 </ul>
       </div>
@@ -102,7 +136,7 @@
         
       
     
-    <li>Git clean</li>
+    <li>Quick reference</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -113,9 +147,12 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="what-it-does">What it does</h1>
+                <h1 id="quick-reference">Quick reference</h1>
+<p>Quick recap and reminder of most frequently (by me!) used GIT commands</p>
+<h2 id="how-to">How to...</h2>
+<h3 id="clean-working-directory">Clean working directory</h3>
 <p><code>git clean</code> delete files which are not part of git.</p>
-<h2 id="main-cptions">Main cptions</h2>
+<p>Main cptions</p>
 <table>
 <thead>
 <tr>
@@ -146,6 +183,109 @@
 </tr>
 </tbody>
 </table>
+<h3 id="delete-a-branch">Delete a branch</h3>
+<pre><code class="bash">git branch -d name_of_branch
+</code></pre>
+
+<h3 id="remove-a-remote-branch">Remove a remote branch</h3>
+<pre><code class="bash">git push origin --delete the_remote_branch
+</code></pre>
+
+<h3 id="ccreate-a-branch-from-a-given-source">Ccreate a branch from a given source</h3>
+<pre><code class="bash">git checkout -b name-of-new-branch name-of-source-branch
+</code></pre>
+
+<h3 id="create-a-new-branch-from-changes-in-current-branch">Create a new branch from changes in current branch</h3>
+<pre><code class="bash">#first, stash changes
+git stash save &lt;message&gt;
+
+#then create a new branch from that stash
+git stash branch name-of-new-branch stash@{0}
+</code></pre>
+
+<p>Or simply</p>
+<pre><code class="bash"># create and checkout a new branch keeping all changes in the previously current branch
+git checkout -b name-of-new-branch
+</code></pre>
+
+<h3 id="rename-a-branch">Rename a branch</h3>
+<p>Rename current branch</p>
+<pre><code class="bash"># on branch to be renamed
+git branch -m new-name
+</code></pre>
+
+<p>Rename a different (i.e. not current) branch</p>
+<pre><code class="bash"># from a different branch
+git branch -m old-name new-name
+</code></pre>
+
+<p>Then</p>
+<pre><code class="bash"># delete the old-name remote branch and push the new-name local branch
+# local branch will have no upstream after this command
+git push origin :old-name new-name
+
+# reset the upstream branch for the new-name local branch: switch to the branch and then
+git push origin -u new-name
+</code></pre>
+
+<h3 id="checkout-a-tag">Checkout a tag</h3>
+<p>Checkout a specific tag</p>
+<pre><code class="bash">git checkout  tags/name-of-tag
+</code></pre>
+
+<h3 id="list-tags">List tags</h3>
+<p>List tags</p>
+<pre><code class="bash"># --list can be omitted
+git tag --list
+</code></pre>
+
+<p>List tags matching a pattern</p>
+<pre><code class="bash"># list all tags starting with &quot;v-&quot;
+git tag --list 'v-*'
+</code></pre>
+
+<h3 id="create-a-tag">Create a tag</h3>
+<p>Create an annotated tag</p>
+<pre><code class="bash">git tag -a name-of-tag -m &quot;&lt;message&gt;&quot;
+</code></pre>
+
+<h3 id="stash-changes">Stash changes</h3>
+<pre><code class="bash">git stash save -m &quot;&lt;message&gt;&quot;
+</code></pre>
+
+<h3 id="check-stash">Check stash</h3>
+<p>View content of a stash</p>
+<pre><code class="bash"># show content of second-to-last stash
+git stash show -p [stash@{1}]
+</code></pre>
+
+<p>View content of stash, filename only</p>
+<pre><code class="bash"># show filename of files stashed (second-to-last stash)
+git stash show [stash@{1}] --name-only
+</code></pre>
+
+<h3 id="apply-stash">Apply stash</h3>
+<pre><code class="bash">Apply a stash
+git stash pop stash@{1}
+</code></pre>
+
+<h3 id="search-for-a-commit">Search for a commit</h3>
+<pre><code class="bash"># search in all git history
+git grep &lt;regexp&gt; $(git rev-list --all)
+</code></pre>
+
+<h3 id="unstage-a-file">Unstage a file</h3>
+<pre><code class="bash">git reset /path/to/file
+</code></pre>
+
+<h3 id="revert-committed-changes-in-a-file">Revert committed changes in a file</h3>
+<p>```bash
+git checkout <commit-hash> /path/to/file</p>
+<h1 id="revert-last-commit">revert last commit</h1>
+<p>git revert HEAD</p>
+<h1 id="revert-specific-commits">revert specific commits</h1>
+<p>git revert <commit1> [<commitN>]
+```bash</p>
               
             </div>
           </div>

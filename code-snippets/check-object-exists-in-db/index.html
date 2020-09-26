@@ -9,7 +9,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>Manage VARBINARY column via T-SQL - Bitdeas Tech Notes</title>
+  <title>Check if an object exists in a database - Bitdeas Tech Notes</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
   <link rel="stylesheet" href="../../css/theme.css" />
@@ -18,8 +18,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Manage VARBINARY column via T-SQL";
-    var mkdocs_page_input_path = "code-snippets\\manage-binary-content-from-database.md";
+    var mkdocs_page_name = "Check if an object exists in a database";
+    var mkdocs_page_input_path = "code-snippets\\check-object-exists-in-db.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -68,25 +68,23 @@
                 </ul>
                 <p class="caption"><span class="caption-text">Snippets</span></p>
                 <ul class="current">
-                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Manage VARBINARY column via T-SQL</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#insert-a-blob">Insert a BLOB</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#update-content-of-a-varbinary-column">Update content of a VARBINARY column</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#save-content-to-file">Save content to file</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#requirements">Requirements</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#code">Code</a>
-    </li>
-        </ul>
-    </li>
-    </ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../manage-binary-content-from-database/">Manage VARBINARY column via T-SQL</a>
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="../map-error-message-to-code/">Get SQL Server error code from message</a>
                     </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../check-object-exists-in-db/">Check if an object exists in a database</a>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Check if an object exists in a database</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#use-information_schematables">Use INFORMATION_SCHEMA.TABLES</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#use-object_id">Use OBJECT_ID</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#use-using-sysobjects-catalog-view">Use Using sys.objects Catalog View</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#use-using-systables-catalog-view">Use Using sys.tables Catalog View</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#using-syssysobjects">Using sys.sysobjects</a>
+    </li>
+    </ul>
                     </li>
                 </ul>
       </div>
@@ -114,7 +112,7 @@
         
       
     
-    <li>Manage VARBINARY column via T-SQL</li>
+    <li>Check if an object exists in a database</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -125,90 +123,52 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="insert-update-and-extract-a-blob-using-t-sql-only">Insert, update and extract a BLOB using T-SQL only</h1>
-<h2 id="insert-a-blob">Insert a BLOB</h2>
-<pre><code class="SQL">/* Create a table with a VARBINARY column */
-CREATE TABLE Documents(
-  [FileName] NVARCHAR(60),
-  [FileType  NVARCHAR(60), 
-  [Content]  VARBINARY(max)
-)
-GO
-
-INSERT INTO Documents(
-  [FileName], [FileType], [Content]
-)
-SELECT 
-  N'Text1.txt' AS [FileName],
-  N'.txt' AS [FileType],
-  * FROM OPENROWSET(BULK N'C:\path\to\Text1.txt', SINGLE_BLOB) AS [Content]
-GO
+                <h2 id="check-if-a-table-exists">Check if a table exists</h2>
+<p>There are many ways to check for a table</p>
+<h3 id="use-information_schematables">Use INFORMATION_SCHEMA.TABLES</h3>
+<pre><code class="SQL">IF EXISTS (SELECT 1 
+           FROM   INFORMATION_SCHEMA.TABLES 
+           WHERE  SCHEMA_NAME = N'orders'
+           AND    TABLE_NAME = N'Customers')
+BEGIN
+  -- do something
+END
 </code></pre>
 
-<h2 id="update-content-of-a-varbinary-column">Update content of a VARBINARY column</h2>
-<p>Assuming the same table as in the sample above</p>
-<pre><code class="SQL">UPDATE 
-  Documents
-SET 
-  Content = (SELECT * FROM OPENROWSET(BULK N'c:\path\to\20180520215030133.docx', SINGLE_BLOB) AS T)
-WHERE 
-  [FileName] = N'Doc1.docx'
+<h3 id="use-object_id">Use OBJECT_ID</h3>
+<pre><code class="SQL">IF OBJECT_ID(N'orders.Customers', N'U') IS NOT NULL
+BEGIN
+  -- do something
+END
 </code></pre>
 
-<h2 id="save-content-to-file">Save content to file</h2>
-<p>Use this code to save the content of a blob (varbinary or image) 
-into a file, using T-SQL only.</p>
-<h3 id="requirements">Requirements</h3>
-<pre><code class="SQL">sp_configure 'show advanced options', 1;  
-GO  
-
-RECONFIGURE;  
-GO  
-
-sp_configure 'Ole Automation Procedures', 1;  
-GO  
-
-RECONFIGURE;  
-GO 
+<h3 id="use-using-sysobjects-catalog-view">Use Using sys.objects Catalog View</h3>
+<pre><code class="SQL">IF EXISTS(SELECT 1 
+          FROM   sys.objects 
+          WHERE  object_id = OBJECT_ID(N'orders.Customers') 
+          AND    [type] = N'U')
+BEGIN
+  -- do something
+END
 </code></pre>
 
-<h3 id="code">Code</h3>
-<pre><code class="SQL">DECLARE 
-  @rawData      VARBINARY(MAX),
-  @timestamp    VARCHAR(MAX),
-  @objectToken  INT
+<h3 id="use-using-systables-catalog-view">Use Using sys.tables Catalog View</h3>
+<pre><code class="SQL">IF EXISTS(SELECT 1 
+          FROM   sys.tables T
+          INNER JOIN sys.schemas S
+          ON     T.schema_id = S.schema_id
+          WHERE  T.[name] = N'Customers') 
+          AND    T.[type] = N'U'
+          AND    S.[name] = N'orders')
+BEGIN
+  -- do something
+END
 
-/* sample select */
-DECLARE IMGPATH 
-  CURSOR FAST_FORWARD FOR 
-  SELECT Content
-  FROM [dbName].dbo.Reports 
-  WHERE id = 7140
-
-OPEN IMGPATH 
-
-FETCH NEXT FROM IMGPATH INTO @rawData
-
-WHILE @@FETCH_STATUS = 0
-    BEGIN
-        SET @timestamp = 'c:\path\to\folder\' + REPLACE(REPLACE(REPLACE(REPLACE(CONVERT(VARCHAR, GETDATE(), 121), '-', ''), ':', ''), '.', ''), ' ', '') + '.docx'
-
-        PRINT @timestamp
-
-        EXEC sp_OACreate 'ADODB.Stream', @objectToken OUTPUT
-        EXEC sp_OASetProperty @objectToken, 'Type', 1
-        EXEC sp_OAMethod @objectToken, 'Open'
-        EXEC sp_OAMethod @objectToken, 'Write', NULL, @rawData
-        EXEC sp_OAMethod @objectToken, 'SaveToFile', NULL, @timetamp, 2
-        EXEC sp_OAMethod @objectToken, 'Close'
-        EXEC sp_OADestroy @objectToken
-
-        FETCH NEXT FROM IMGPATH INTO @rawData
-    END 
-
-CLOSE IMGPATH
-DEALLOCATE IMGPATH
+*We can skip JOIN if there if database has just one schema, or tables have unique names.*
 </code></pre>
+
+<h3 id="using-syssysobjects">Using sys.sysobjects</h3>
+<p>Should be avoided, as <code>sys.sysobjects</code> is being deprecated.</p>
               
             </div>
           </div>
@@ -216,10 +176,8 @@ DEALLOCATE IMGPATH
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../map-error-message-to-code/" class="btn btn-neutral float-right" title="Get SQL Server error code from message">Next <span class="icon icon-circle-arrow-right"></span></a>
       
-      
-        <a href="../../GIT/quick-reference/" class="btn btn-neutral" title="Quick reference"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../map-error-message-to-code/" class="btn btn-neutral" title="Get SQL Server error code from message"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -245,10 +203,8 @@ DEALLOCATE IMGPATH
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../../GIT/quick-reference/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../map-error-message-to-code/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
-      
-        <span style="margin-left: 15px"><a href="../map-error-message-to-code/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
