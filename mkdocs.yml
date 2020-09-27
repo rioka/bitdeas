@@ -5,6 +5,7 @@ theme: readthedocs
 nav:
 - 'Visual Studio':
   - visual-studio/versions.md
+  - visual-studio/project-type-guids.md
 - 'SQL Server':
   - sql-server/versions.md
   - sql-server/get-schema-details.md
@@ -16,6 +17,10 @@ nav:
   - code-snippets/map-error-message-to-code.md 
   - code-snippets/check-object-exists-in-db.md 
   - code-snippets/get-current-identity-values.md 
+  - code-snippets/find-tables-with-given-column.md 
+- '.NET':
+  - dotnet/list-vs-array-collection-vs-enumerable.md
+
 
 markdown_extensions:  
 - admonition #!!! note, !!! warning
