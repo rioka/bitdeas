@@ -20,6 +20,8 @@ nav:
   - code-snippets/find-tables-with-given-column.md 
 - '.NET':
   - dotnet/list-vs-array-collection-vs-enumerable.md
+- 'Windows':
+  - windows/win-10-builds.md
 
 
 markdown_extensions:  
