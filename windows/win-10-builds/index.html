@@ -9,7 +9,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>Some aliases - Bitdeas Tech Notes</title>
+  <title>Windows 10 Builds - Bitdeas Tech Notes</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
   <link rel="stylesheet" href="../../css/theme.css" />
@@ -18,8 +18,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Some aliases";
-    var mkdocs_page_input_path = "GIT\\aliases.md";
+    var mkdocs_page_name = "Windows 10 Builds";
+    var mkdocs_page_input_path = "windows\\win-10-builds.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -62,12 +62,10 @@
                     </li>
                 </ul>
                 <p class="caption"><span class="caption-text">GIT</span></p>
-                <ul class="current">
-                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Some aliases</a>
-    <ul class="current">
-    </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../GIT/aliases/">Some aliases</a>
                     </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../quick-reference/">Quick reference</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../../GIT/quick-reference/">Quick reference</a>
                     </li>
                 </ul>
                 <p class="caption"><span class="caption-text">Snippets</span></p>
@@ -89,8 +87,10 @@
                     </li>
                 </ul>
                 <p class="caption"><span class="caption-text">Windows</span></p>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../../windows/win-10-builds/">Windows 10 Builds</a>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Windows 10 Builds</a>
+    <ul class="current">
+    </ul>
                     </li>
                 </ul>
       </div>
@@ -114,11 +114,11 @@
     
       
         
-          <li>GIT &raquo;</li>
+          <li>Windows &raquo;</li>
         
       
     
-    <li>Some aliases</li>
+    <li>Windows 10 Builds</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -129,83 +129,71 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="some-aliases">Some aliases</h1>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Aliases are saved in <code>.gitconfig</code>, in user home folder, e.g. <code>%UserProfile%</code> in Windows, or <code>~</code> in Linux.</p>
-</div>
-<p>Here are some common aliases I use</p>
+                <h1 id="list-of-windows-10-builds">List of Windows 10 Builds</h1>
+<p>Here is a map from Windows 10 builds</p>
 <table>
 <thead>
 <tr>
-<th>Entry</th>
-<th>Description</th>
+<th align="center">Version</th>
+<th>Codename</th>
+<th>Build</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>st = status</code></td>
-<td>Shortcut for <code>git status</code></td>
+<td align="center">1507</td>
+<td>(Threshold 1)</td>
+<td>10.0.10240</td>
 </tr>
 <tr>
-<td><code>cl = clone</code></td>
-<td>Shortcut for <code>git clone</code></td>
+<td align="center">1511</td>
+<td>(Threshold 2)</td>
+<td>10.0.10586</td>
 </tr>
 <tr>
-<td><code>co = checkout</code></td>
-<td>Shortcut for <code>git checkout</code></td>
+<td align="center">1607</td>
+<td>(Redstone 1)</td>
+<td>10.0.14393</td>
 </tr>
 <tr>
-<td><code>ci = commit</code></td>
-<td>Shortcut for <code>git commit</code></td>
+<td align="center">1703</td>
+<td>(Redstone 2)</td>
+<td>10.0.15063</td>
 </tr>
 <tr>
-<td><code>com = checkout master</code></td>
-<td>Shortcut for <code>git checkout master</code></td>
+<td align="center">1709</td>
+<td>(Redstone 3)</td>
+<td>10.0.16299</td>
 </tr>
 <tr>
-<td><code>cob = checkout -b</code></td>
-<td>Shortcut for <code>git checkout -b</code>; create a branch and check it out</td>
+<td align="center">1803</td>
+<td>(Redstone 4)</td>
+<td>10.0.17134</td>
 </tr>
 <tr>
-<td><code>delb = branch -D</code></td>
-<td>Delete a branch</td>
+<td align="center">1809</td>
+<td>(Redstone 5)</td>
+<td>10.0.17763</td>
 </tr>
 <tr>
-<td><code>pl = pull</code></td>
-<td>Shortcut for <code>git pull</code></td>
+<td align="center">1903</td>
+<td>(19H1)</td>
+<td>10.0.18362</td>
 </tr>
 <tr>
-<td><code>plp = pull --prune</code></td>
-<td>Pull and prune local branches</td>
+<td align="center">1909</td>
+<td>(19H2)</td>
+<td>10.0.18363</td>
 </tr>
 <tr>
-<td><code>ps = push</code></td>
-<td>Shortcut for <code>git push</code></td>
+<td align="center">2004</td>
+<td>(20H1)</td>
+<td>10.0.19041</td>
 </tr>
 <tr>
-<td><code>psup = push</code></td>
-<td>Shortcut for <code>git push upstream origin</code>; push and create branch in remote origin</td>
-</tr>
-<tr>
-<td><code>lo1g = log --oneline --graph</code></td>
-<td></td>
-</tr>
-<tr>
-<td><code>lobd = log --branches --date-order</code></td>
-<td></td>
-</tr>
-<tr>
-<td><code>showalias = config --get-regexp alias</code></td>
-<td></td>
-</tr>
-<tr>
-<td><code>unstage = reset HEAD --</code></td>
-<td>delete last commit, but keep file; so you get back 1 commit, but do not lose anything</td>
-</tr>
-<tr>
-<td><code>mt = mergetool</code></td>
-<td>Run mergetool to solve conflicts</td>
+<td align="center">2010</td>
+<td>(20H2)</td>
+<td>10.0.19042</td>
 </tr>
 </tbody>
 </table>
@@ -216,10 +204,8 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../quick-reference/" class="btn btn-neutral float-right" title="Quick reference">Next <span class="icon icon-circle-arrow-right"></span></a>
       
-      
-        <a href="../../sql-server/get-schema-details/" class="btn btn-neutral" title="Get schema details"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../dotnet/list-vs-array-collection-vs-enumerable/" class="btn btn-neutral" title="Lists vs Array vs Collections"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -245,10 +231,8 @@
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../../sql-server/get-schema-details/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../../dotnet/list-vs-array-collection-vs-enumerable/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
-      
-        <span style="margin-left: 15px"><a href="../quick-reference/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
