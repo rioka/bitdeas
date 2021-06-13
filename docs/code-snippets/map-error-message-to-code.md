@@ -5,7 +5,7 @@ title: Get SQL Server error code from message
 
 # Get SQL Server error code from an error message 
 
-Sometimes you want to get the error code for a gioven  error message, e.g. to add custom 
+Sometimes you want to get the error code for a given  error message, e.g. to add custom 
 error handling code; the following statement can be used to retrieve the error code(s) matching an error message.
 
 ```SQL
